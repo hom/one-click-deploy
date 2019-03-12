@@ -21,6 +21,18 @@ yum makecache fast
 
 yum install -y docker-ce
 
-curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://f1361db2.m.daocloud.io
+file=/etc/docker/daemon.json
+if [ -f $file]; then
+  echo "file exists"
+else
+  echo "file dont exist\n"
+  touch /etc/docker/daemon.json
+fi
+
+cat > /etc/docker/daemon.json <<-EOF
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+EOF
 
 systemctl restart docker
