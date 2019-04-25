@@ -1,1 +1,1 @@
-# one-step-install
+# one-step-deploy
